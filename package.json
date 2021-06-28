@@ -1,0 +1,36 @@
+{
+  "name": "ipcx",
+  "version": "1.0.0",
+  "description": "Provides basic routing for interprocess communications between processes.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "npm run build && node ./test",
+    "clean": "node ./util/clean",
+    "build": "npm run clean && npx tsc"
+  },
+  "files": [
+    "/dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rledford/ipcx.git"
+  },
+  "keywords": [
+    "ipc",
+    "child process",
+    "events",
+    "typescript",
+    "node"
+  ],
+  "author": "Ryan Ledford (@rledford)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rledford/ipcx/issues"
+  },
+  "homepage": "https://github.com/rledford/ipcx#readme",
+  "devDependencies": {
+    "@types/node": "^15.12.5",
+    "typescript": "^4.3.4"
+  }
+}
