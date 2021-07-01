@@ -1,8 +1,8 @@
 type IPCXMessage = {
-  source: string;
-  targets: string[];
+  src: string;
+  dest: string[];
   event: string;
-  payload: Object;
+  data: Object;
 };
 
 export { IPCXMessage };

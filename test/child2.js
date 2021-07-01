@@ -7,25 +7,25 @@ setInterval(() => {
 
 process.on('message', () => {
   rcvCount++;
-  // console.log('child2 received event', msg.event, 'from', msg.source);
+  // console.log('child2 received event', msg.event, 'from', msg.src);
 });
 
 setInterval(() => {
   process.send({
-    source: 'child2',
-    targets: ['master'],
+    src: 'child2',
+    dest: ['master'],
     event: 'test2',
-    payload: {}
+    data: {}
   });
 }, 5000);
 
 setInterval(() => {
   for (let i = 0; i < 25; i++) {
     process.send({
-      source: 'child2',
-      targets: ['child1'],
+      src: 'child2',
+      dest: ['child1'],
       event: 'test',
-      payload: {
+      data: {
         timestamp: new Date()
       }
     });
