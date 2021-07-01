@@ -7,7 +7,8 @@
   "scripts": {
     "test": "npm run build && node ./test",
     "clean": "node ./util/clean",
-    "build": "npm run clean && npx tsc"
+    "build": "npm run clean && npx tsc",
+    "prepare": "npm run build"
   },
   "files": [
     "/dist"
