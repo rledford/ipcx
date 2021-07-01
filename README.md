@@ -16,7 +16,7 @@
 
 ## About
 
-IPCX provides basic routing for interprocess communications. Child processes can communicate with the master process as well as other child processes using IPCXMessage messages. The IPCX class provides convenient methods for pub/sub so that the master process doesn't have to use `process.on` and `process.send` to communicate with child processes. Only child processes use `process.send` and `process.on` to send and receive `IPCXMessage` messages as they are routed through a master IPCX instance.
+IPCX provides basic routing for interprocess communications. Child processes can communicate with the master process as well as other child processes using `IPCXMessage` messages. The IPCX class provides methods for pub/sub so that the master process doesn't have to use `process.on` and `process.send` to communicate with child processes. Only child processes use `process.send` and `process.on` to send and receive `IPCXMessage` messages as they are routed through a master IPCX instance.
 
 ## Install
 
