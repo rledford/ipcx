@@ -3,7 +3,7 @@
 - [Table of Contents](#table-of-contents)
 - [About](#about)
 - [Install](#install)
-- [IPCMessage Structure](#ipcmessage-structure)
+- [IPCXMessage Structure](#ipcxmessage-structure)
 - [IPCX](#ipcx)
   - [constructor](#constructor)
   - [register](#register)
@@ -16,7 +16,7 @@
 
 ## About
 
-IPCX provides basic routing for interprocess communications between processes. Child processes can easily communicate with the master process as well as other child processes using a master IPCX instance. The IPCX class provides convenient methods for pub/sub so that the master process doesn't have to use `process.on` and `process.send` to communicate with child processes. Only child processes use `process.send` and `process.on` to send and receive `IPCMessage` messages as they are routed through a master IPCX instance.
+IPCX provides basic routing for interprocess communications. Child processes can communicate with the master process as well as other child processes using the IPCXMessage structure. The IPCX class provides convenient methods for pub/sub so that the master process doesn't have to use `process.on` and `process.send` to communicate with child processes. Only child processes use `process.send` and `process.on` to send and receive `IPCXMessage` messages as they are routed through a master IPCX instance.
 
 ## Install
 
@@ -24,7 +24,7 @@ IPCX provides basic routing for interprocess communications between processes. C
 npm i -S ipcx
 ```
 
-## IPCMessage Structure
+## IPCXMessage Structure
 
 Child processes that are registered with an IPCX instance should send interprocess messages using `process.send` and should have the following message structure.
 
@@ -36,7 +36,7 @@ Child processes that are registered with an IPCX instance should send interproce
 | payload  | Object   | A user-defined object that contains relevant event data                                                                                              |
 
 ```js
-// Example IPCMessage sending from a child process
+// Example IPCXMessage sending from a child process
 
 // Send to specific processes
 process.send({
@@ -52,7 +52,7 @@ process.send({
 // Send to all other processes
 process.send({
   source: 'child1',
-  targets: [], // send to all other processes
+  targets: [], // not specifying any targets will send to all other processes
   event: 'example',
   payload: {
     say: "hello",
@@ -73,7 +73,7 @@ process.send({
  */
 
 // Example usage
-const ipc = new IPCX('master');
+const ipcx = new IPCX('master');
 ```
 
 ### register
@@ -87,7 +87,7 @@ const ipc = new IPCX('master');
  */
 
 // Example usage
-ipc.register('name', process);
+ipcx.register('name', process);
 ```
 
 ### subscribe
@@ -100,7 +100,7 @@ ipc.register('name', process);
  */
 
 // Example usage
-ipc.subscribe('event', () => {
+ipcx.subscribe('event', () => {
   // handle event
 });
 ```
@@ -116,7 +116,7 @@ ipc.subscribe('event', () => {
  */
 
 // Example usage
-ipc.publish(['workerA', 'workerB'], 'event', {});
+ipcx.publish(['workerA', 'workerB'], 'event', {});
 ```
 
 ### broadcast
@@ -129,7 +129,7 @@ ipc.publish(['workerA', 'workerB'], 'event', {});
  */
 
 // Example usage
-ipc.broadcast('event', {});
+ipcx.broadcast('event', {});
 ```
 
 ### trigger
@@ -142,7 +142,7 @@ ipc.broadcast('event', {});
  */
 
 // Example usage
-ipc.trigger('event', {});
+ipcx.trigger('event', {});
 ```
 
 ## Usage
@@ -191,15 +191,15 @@ const WORKER_A = 'workerA'; // name for workerA.js worker
 const WORKER_B = 'workerB'; // name for workerB.js worker
 
 const cp = require('child_process');
-const { IPC } = require('ipcx');
+const { IPCX } = require('ipcx');
 
-const ipc = new IPC(MASTER);
+const ipcx = new IPCX(MASTER);
 // start child process workers
-let wA = cp.fork('./workerA.js');
-let wB = cp.fork('./workerB.js');
+let workerA = cp.fork('./workerA.js');
+let workerB = cp.fork('./workerB.js');
 
-ipc.register(WORKER_A, wA); // register the worker with a unique name for proper routing
-ipc.register(WORKER_B, wB); // register the worker with a unique name for proper routing
+ipcx.register(WORKER_A, workerA); // register the worker with a unique name for proper routing
+ipcx.register(WORKER_B, workerB); // register the worker with a unique name for proper routing
 ```
 
 ## Important Notes
@@ -207,6 +207,6 @@ ipc.register(WORKER_B, wB); // register the worker with a unique name for proper
 - A process can be given any name. Name the master process and its children something that identifies their responsibilities. Define process names in a file as constants that the master and child processes will `require` so that the names can be managed in one place.
 - Child processes that have been registered with an IPCX instance are automatcially unregistered when the child process exits.
 - Do not create an IPCX instance in a child process unless it will be creating its own child processes. The children of a child process will not be able to communicate directly with master process, but with proper event handling forwarding events to the master process can be achieved.
-- When sending an IPCMessage from a child process, setting `targets` to an empty array will result in the event being broadcast to all other processes.
+- When sending an IPCXMessage from a child process, setting `targets` to an empty array will result in the event being broadcast to all other processes.
 - When using the IPCX `subscribe` method, ensure the callback does not return a value (see next note).
 - Callbacks passed to the `subscribe` method are wrapped in a Promise by IPCX. If the callback returns a value, it will be ignored. Do not expect the callbacks to be executed sequentially as they are run asynchronously.
