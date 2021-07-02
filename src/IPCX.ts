@@ -153,4 +153,4 @@ class IPCX {
   }
 }
 
-export = { IPCX };
+export = IPCX;

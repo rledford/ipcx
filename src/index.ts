@@ -1,1 +1,3 @@
-export { default as IPCX } from './IPCX';
+import IPCX from './IPCX';
+
+export = { IPCX };
