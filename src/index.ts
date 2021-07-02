@@ -153,6 +153,4 @@ class IPCX {
   }
 }
 
-module.exports = {
-  IPCX
-};
+export { IPCX };
