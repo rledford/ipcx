@@ -4,7 +4,7 @@ import { ChildProcess } from 'child_process';
 import { IPCXCallback } from './types/IPCXCallback';
 import { IPCXMessage } from './types/IPCXMessage';
 
-class IPCX {
+export class IPCX {
   __name: string;
   __procs: Map<String, ChildProcess>;
   __subs: {
@@ -152,5 +152,3 @@ class IPCX {
     }
   }
 }
-
-export { IPCX };

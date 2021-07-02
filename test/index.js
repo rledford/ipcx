@@ -1,6 +1,6 @@
-const { IPCX } = require('../dist');
+const ipcx = require('../dist');
 const cp = require('child_process');
-const ipc = new IPCX('master');
+const ipc = new ipcx.IPCX('master');
 const interval = 0;
 
 ipc.subscribe('trigger', () => {
