@@ -1,6 +1,6 @@
 {
   "name": "ipcx",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Provides basic routing for interprocess communications between processes.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
