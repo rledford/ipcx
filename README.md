@@ -73,7 +73,8 @@ process.send({
  */
 
 // Example usage
-const ipcx = new IPCX('master');
+const { IPCX } = require('ipcx'); // import IPCX class
+const ipcx = new IPCX('master'); // create new instance of IPCX
 ```
 
 ### register
@@ -88,7 +89,8 @@ const ipcx = new IPCX('master');
 
 // Example usage
 const child_process = require('child_process');
-const ipcx = new IPCX('master');
+const { IPCX } = require('ipcx'); // import IPCX class
+const ipcx = new IPCX('master'); // create new instance of IPCX
 const cp = child_process.for('<path-to-js-file>');
 ipcx.register('example', cp);
 ```
@@ -103,7 +105,8 @@ ipcx.register('example', cp);
  */
 
 // Example usage
-const ipcx = new IPCX('master');
+const { IPCX } = require('ipcx'); // import IPCX class
+const ipcx = new IPCX('master'); // create new instance of IPCX
 ipcx.subscribe('event', () => {
   // handle event
 });
@@ -120,7 +123,8 @@ ipcx.subscribe('event', () => {
  */
 
 // Example usage
-const ipcx = new IPCX('master');
+const { IPCX } = require('ipcx'); // import IPCX class
+const ipcx = new IPCX('master'); // create new instance of IPCX
 ipcx.publish(['workerA', 'workerB'], 'event', {});
 ```
 
@@ -134,7 +138,8 @@ ipcx.publish(['workerA', 'workerB'], 'event', {});
  */
 
 // Example usage
-const ipcx = new IPCX('master');
+const { IPCX } = require('ipcx'); // import IPCX class
+const ipcx = new IPCX('master'); // create new instance of IPCX
 ipcx.broadcast('event', {});
 ```
 
@@ -148,7 +153,8 @@ ipcx.broadcast('event', {});
  */
 
 // Example usage
-const ipcx = new IPCX('master');
+const { IPCX } = require('ipcx'); // import IPCX class
+const ipcx = new IPCX('master'); // create new instance of IPCX
 ipcx.subscribe('event', () => {
   // handle event
 });
@@ -201,9 +207,9 @@ const WORKER_A = 'workerA'; // name for workerA.js worker
 const WORKER_B = 'workerB'; // name for workerB.js worker
 
 const child_process = require('child_process');
-const { IPCX } = require('ipcx');
+const { IPCX } = require('ipcx'); // import IPCX class
 
-const ipcx = new IPCX(MASTER);
+const ipcx = new IPCX(MASTER); // create new instance of IPCX
 // start child process workers
 let workerA = child_process.fork('./workerA.js');
 let workerB = child_process.fork('./workerB.js');
