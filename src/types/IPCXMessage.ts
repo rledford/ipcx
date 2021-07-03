@@ -1,5 +1,5 @@
 type IPCXMessage = {
-  src: string;
+  pid: number;
   dest: string[];
   event: string;
   data: Object;
