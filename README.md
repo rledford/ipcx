@@ -243,5 +243,3 @@ ipcx.broadcast('event', {});
 - Child processes that have been registered with an IPCX instance are automatcially unregistered when the child process exits.
 - Do not create an IPCX instance in a child process unless it will be creating its own child processes. The children of a child process will not be able to communicate directly with master process, but with proper event handling forwarding events to the master process can be achieved.
 - When sending an IPCXMessage from a child process, setting `dest` to an empty array will result in the event being broadcast to all other processes.
-- When using the IPCX `subscribe` method, ensure the callback does not return a value (see next note).
-- Callbacks passed to the `subscribe` method are wrapped in a Promise by IPCX. If the callback returns a value, it will be ignored. Do not expect the callbacks to be executed sequentially as they are run asynchronously.
